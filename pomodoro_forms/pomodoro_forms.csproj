@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <ProduceReferenceAssemblyInOutDir>true</ProduceReferenceAssemblyInOutDir>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Fonts\fa-brands-400.ttf" />
+    <None Remove="Resources\Fonts\fa-regular-400.ttf" />
+    <None Remove="Resources\Fonts\fa-solid-900.ttf" />
+    <None Remove="Resources\Images\FrameBlue.png" />
+    <None Remove="Resources\Images\FrameGreen.png" />
+    <None Remove="Resources\Images\FramePink.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\fa-brands-400.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\fa-regular-400.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\fa-solid-900.ttf" />
+    <EmbeddedResource Include="Resources\Images\FrameBlue.png" />
+    <EmbeddedResource Include="Resources\Images\FrameGreen.png" />
+    <EmbeddedResource Include="Resources\Images\FramePink.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="LongBreakPage.xaml.cs">
+      <DependentUpon>LongBreakPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="StopShortBreak.xaml.cs">
+      <DependentUpon>StopShortBreak.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="StopLongBreak.xaml.cs">
+      <DependentUpon>StopLongBreak.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="StopFocus.xaml.cs">
+      <DependentUpon>StopFocus.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ShortBreakPage.xaml.cs">
+      <DependentUpon>ShortBreakPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

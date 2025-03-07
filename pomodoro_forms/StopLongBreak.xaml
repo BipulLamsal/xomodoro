@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://xamarin.com/schemas/2014/forms/toolkit"
+             x:Class="pomodoro_forms.StopLongBreak"
+             BackgroundColor="#F2F9FF">
+
+
+    <ContentPage.BackgroundImageSource>
+        <FileImageSource File="frameblue.png" />
+    </ContentPage.BackgroundImageSource>
+
+
+
+    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+
+        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+            <Frame Padding="20, 0, 20, 0" CornerRadius="20" HasShadow="False" BackgroundColor="#26264CACFF"  BorderColor="#153047">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="5" >
+                    <Label Text="&#xf017;" 
+                        FontFamily="{StaticResource FASolid}"
+                        FontSize="18"
+                        TextColor="#153047"
+                        Margin="0, 6 ,0 ,0"/>
+
+                    <Label Text="Times Up"
+                       FontSize="18"
+                       TextColor="#153047"
+                       Padding="5"
+                        />
+
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Spacing="-70">
+            <Label x:Name="minuteLabel" Text="00" FontSize="150" TextColor="#153047" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            <Label x:Name="secondLabel" Text="00" FontSize="150" TextColor="#153047" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+
+
+        <Button x:Name="PauseResumeButton"
+Padding="5"
+HeightRequest="50"
+BackgroundColor="#B34CACFF"
+CornerRadius="15"
+BorderColor="#153047"
+TextColor="#153047"
+FontSize="20"
+FontFamily="{StaticResource FASolid}"             
+Text="&#xf04e;"
+Clicked="NextScreen"
+HorizontalOptions="Center"
+VerticalOptions="Center"/>
+
+
+
+
+
+    </StackLayout>
+    </StackLayout>
+
+
+</ContentPage>

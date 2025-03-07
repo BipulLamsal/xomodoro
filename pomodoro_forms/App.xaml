@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://xamarin.com/schemas/2014/forms/toolkit"
+             
+
+             x:Class="pomodoro_forms.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <x:String x:Key="FABrand">Fonts/fa-brand-300.ttf#Font Awesome 6 Brands Regular</x:String>
+            <x:String x:Key="FASolid">Fonts/fa-solid-900.ttf#Font Awesome 6 Free</x:String>
+            <x:String x:Key="FARegular">Fonts/fa-regular-300.ttf#Font Awesome 6 Free</x:String>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

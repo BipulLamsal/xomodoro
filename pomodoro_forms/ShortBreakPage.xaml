@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://xamarin.com/schemas/2014/forms/toolkit"
+             x:Class="pomodoro_forms.ShortBreakPage"
+             BackgroundColor="#F2FFF5">
+
+    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+            <Frame Padding="20, 0, 20, 0" CornerRadius="20" HasShadow="False" BackgroundColor="#264DDA6E"  BorderColor="#14401D">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="5" >
+                    <Label Text="&#xf0f4;" 
+                        FontFamily="{StaticResource FASolid}"
+                        FontSize="18"
+                        TextColor="#14401D"
+                        Margin="0, 6 ,0 ,0"/>
+
+                    <Label Text="Short Break"
+                       FontSize="18"
+                       TextColor="#14401D"
+                       Padding="5"
+                        />
+
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+        
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Spacing="-70">
+            <Label x:Name="minuteLabel" Text="00" FontSize="150" TextColor="#14401D" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            <Label x:Name="secondLabel" Text="00" FontSize="150" TextColor="#14401D" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+
+            <Button x:Name="PauseResumeButton"
+            Padding="5"
+            WidthRequest="50" HeightRequest="50"
+            BackgroundColor="#264DDA6E"
+            CornerRadius="15"
+            BorderColor="#14401D"
+            TextColor="#14401D"
+            FontSize="15"
+            FontFamily="{StaticResource FASolid}"
+            Text="&#xf2f9;"
+                Clicked="OnRestartClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+
+
+            <Button x:Name="StartPauseButton"
+            Padding="10"
+            WidthRequest="100" HeightRequest="80"
+            BackgroundColor="#B34DDA6E"
+            CornerRadius="25"
+            BorderColor="#14401D"
+            TextColor="#14401D"
+            FontSize="30"
+            FontFamily="{StaticResource FASolid}"
+            Text="&#xf04b;" 
+                Clicked="OnStartPauseResumeClicked"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+
+            <Button x:Name="RestartButton"
+            Padding="5"
+            WidthRequest="50" HeightRequest="50"
+            BackgroundColor="#264DDA6E"
+            CornerRadius="15"
+            BorderColor="#14401D"
+            TextColor="#14401D"
+            FontSize="15"
+            FontFamily="{StaticResource FASolid}"
+            Text="&#xf04e;"
+            Clicked="onLongBreakButtonPressed"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+        </StackLayout>
+
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pomodoro_forms.Android", "pomodoro_forms.Android\pomodoro_forms.Android.csproj", "{E7F84A82-E6FF-41CF-B61D-8A378F385F5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pomodoro_forms.iOS", "pomodoro_forms.iOS\pomodoro_forms.iOS.csproj", "{F81F1199-4500-47C1-BE29-7AB59250C81F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pomodoro_forms", "pomodoro_forms\pomodoro_forms.csproj", "{9EEAF336-6C71-4678-BC64-4C58D351C41A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7F84A82-E6FF-41CF-B61D-8A378F385F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F84A82-E6FF-41CF-B61D-8A378F385F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7F84A82-E6FF-41CF-B61D-8A378F385F5C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E7F84A82-E6FF-41CF-B61D-8A378F385F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F84A82-E6FF-41CF-B61D-8A378F385F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7F84A82-E6FF-41CF-B61D-8A378F385F5C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F81F1199-4500-47C1-BE29-7AB59250C81F}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{F81F1199-4500-47C1-BE29-7AB59250C81F}.Debug|Any CPU.Build.0 = Debug|iPhone
+		{F81F1199-4500-47C1-BE29-7AB59250C81F}.Debug|Any CPU.Deploy.0 = Debug|iPhone
+		{F81F1199-4500-47C1-BE29-7AB59250C81F}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
+		{F81F1199-4500-47C1-BE29-7AB59250C81F}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
+		{F81F1199-4500-47C1-BE29-7AB59250C81F}.Release|Any CPU.Deploy.0 = Release|iPhoneSimulator
+		{9EEAF336-6C71-4678-BC64-4C58D351C41A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EEAF336-6C71-4678-BC64-4C58D351C41A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EEAF336-6C71-4678-BC64-4C58D351C41A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9EEAF336-6C71-4678-BC64-4C58D351C41A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EEAF336-6C71-4678-BC64-4C58D351C41A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EEAF336-6C71-4678-BC64-4C58D351C41A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F9B7499-E151-4B5C-84A7-D8376AFDA1E0}
+	EndGlobalSection
+EndGlobal

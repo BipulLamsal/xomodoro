@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://xamarin.com/schemas/2014/forms/toolkit"
+             x:Class="pomodoro_forms.Register"
+             BackgroundColor="#F2FFF5">
+
+    <ContentPage.BackgroundImageSource>
+        <FileImageSource File="framepurple.png" />
+    </ContentPage.BackgroundImageSource>
+
+    <StackLayout Padding="30" Spacing="15" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+
+
+        <Label Text="Register"
+               FontSize="32"
+               FontAttributes="Bold"
+               TextColor="#F2FFF5"
+               HorizontalOptions="Center" 
+               Margin="0,0,0,20"/>
+
+
+        <Label Text="Nickname"
+               FontAttributes="Bold"
+               TextColor="#F2FFF5"
+               HorizontalOptions="Center" 
+               WidthRequest="250"/>
+        <Entry
+               x:Name="NicknameEntry"
+               TextColor="#F2FFF5"
+               BackgroundColor="#26a29bfe"
+               WidthRequest="250"
+               HorizontalOptions="Center" />
+
+       
+        <Label Text="Email"
+               FontAttributes="Bold"
+               TextColor="#F2FFF5"
+               HorizontalOptions="Center" 
+               WidthRequest="250"/>
+        <Entry 
+               Keyboard="Email"
+               x:Name="EmailEntry"
+               TextColor="#F2FFF5"
+               BackgroundColor="#26a29bfe"
+               WidthRequest="250"
+               HorizontalOptions="Center" />
+
+       
+        <Label Text="Password"
+               FontAttributes="Bold"
+               TextColor="#F2FFF5"
+               HorizontalOptions="Center" 
+               WidthRequest="250"/>
+        <Entry 
+               IsPassword="True"
+               x:Name="PasswordEntry"
+               TextColor="#F2FFF5"
+               BackgroundColor="#26a29bfe"
+               WidthRequest="250"
+               HorizontalOptions="Center" />
+
+ 
+        <Button Text="Register"
+                TextColor="White"
+                BackgroundColor="#a29bfe"
+                CornerRadius="10"
+                WidthRequest="250"
+                HorizontalOptions="Center"
+                Clicked="OnRegisterButtonClicked"/>
+
+  
+        <Label Text="Already have an account? Login"
+               HorizontalOptions="Center"
+               TextColor="#F2FFF5">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnLoginLabelTapped"/>
+            </Label.GestureRecognizers>
+        </Label>
+    </StackLayout>
+
+</ContentPage>

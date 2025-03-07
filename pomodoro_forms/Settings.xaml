@@ -1,0 +1,80 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://xamarin.com/schemas/2014/forms/toolkit"
+             x:Class="pomodoro_forms.Settings"
+             BackgroundColor="#F2FFF5">
+
+    <ScrollView>
+        <StackLayout Padding="30,50" Spacing="20">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Spacing="0">
+                <Label Text="Settings" FontSize="25" TextColor="#14401D" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                <Button Text="&#x2716;" FontSize="25" TextColor="#14401D" BackgroundColor="Transparent" Clicked="OnCloseSettings" VerticalOptions="Center" HorizontalOptions="End" />
+            </StackLayout>
+
+            <StackLayout Spacing="15">
+                <Grid ColumnSpacing="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    
+                    <Label Grid.Row="1" Grid.Column="0" FontSize="16" Text="Focus length" TextColor="#14401D" VerticalOptions="Center" />
+                    <Entry Grid.Row="1" Grid.Column="1" x:Name="FocusTimeEntry" 
+                           Keyboard="Numeric" 
+                           Text="{Binding FocusTime}" 
+                           WidthRequest="50" 
+                           TextColor="#14401D" 
+                           BackgroundColor="#264DDA6E" 
+                           TextChanged="OnFocusTimeEntryChanged" />
+
+                    
+                    <Label Grid.Row="2" Grid.Column="0" FontSize="16" Text="Short break length" TextColor="#14401D" VerticalOptions="Center"  />
+                    <Entry Grid.Row="2" Grid.Column="1" x:Name="ShortBreakEntry" 
+                           Keyboard="Numeric" 
+                           Text="{Binding ShortBreak}" 
+                           WidthRequest="50" 
+                           TextColor="#14401D" 
+                           BackgroundColor="#264DDA6E" 
+                           TextChanged="OnFocusTimeEntryChanged" />
+
+                    
+                    <Label Grid.Row="3" Grid.Column="0" FontSize="16" Text="Long break length" TextColor="#14401D" VerticalOptions="Center" />
+                    <Entry Grid.Row="3" Grid.Column="1" x:Name="LongBreakEntry" 
+                           Keyboard="Numeric" 
+                           Text="{Binding LongBreak}" 
+                           WidthRequest="50" 
+                           TextColor="#14401D" 
+                           BackgroundColor="#264DDA6E"  
+                           TextChanged="OnFocusTimeEntryChanged" />
+
+                    
+                    <Label Grid.Row="4" Grid.Column="0" FontSize="16" Text="Auto resume timer" TextColor="#14401D" VerticalOptions="Center" />
+                    <Switch Grid.Row="4" Grid.Column="1" x:Name="AutoResumeToggle" 
+                            ThumbColor="#14401D" 
+                            OnColor="#264DDA6E" 
+                            IsToggled="{Binding AutoResume}" />
+
+                    
+                    <Label Grid.Row="5" Grid.Column="0" FontSize="16" Text="Sound" TextColor="#14401D" VerticalOptions="Center" />
+                    <Switch Grid.Row="5" Grid.Column="1" x:Name="SoundToggle" 
+                            ThumbColor="#14401D" 
+                            OnColor="#264DDA6E" 
+                            IsToggled="{Binding Sound}" />
+
+                    
+                    <Label Grid.Row="6" Grid.Column="0" FontSize="16" Text="Notifications" TextColor="#14401D" VerticalOptions="Center" />
+                    <Switch Grid.Row="6" Grid.Column="1" x:Name="NotificationsToggle" 
+                            ThumbColor="#14401D" 
+                            OnColor="#264DDA6E" 
+                            IsToggled="{Binding Notifications}" />
+                </Grid>
+            </StackLayout>
+
+            <Button Text="Save Settings" Clicked="OnSaveSettings" BackgroundColor="#264DDA6E" TextColor="#14401D" CornerRadius="15" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
