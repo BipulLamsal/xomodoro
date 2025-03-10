@@ -15,27 +15,46 @@
     <None Remove="Resources\Fonts\fa-brands-400.ttf" />
     <None Remove="Resources\Fonts\fa-regular-400.ttf" />
     <None Remove="Resources\Fonts\fa-solid-900.ttf" />
+    <None Remove="Resources\Images\add_icon.png" />
     <None Remove="Resources\Images\FrameBlue.png" />
     <None Remove="Resources\Images\FrameGreen.png" />
     <None Remove="Resources\Images\FramePink.png" />
+    <None Remove="Resources\Images\home_icon.png" />
+    <None Remove="Resources\Images\timer_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\fa-brands-400.ttf" />
     <EmbeddedResource Include="Resources\Fonts\fa-regular-400.ttf" />
     <EmbeddedResource Include="Resources\Fonts\fa-solid-900.ttf" />
+    <EmbeddedResource Include="Resources\Images\add_icon.png" />
     <EmbeddedResource Include="Resources\Images\FrameBlue.png" />
     <EmbeddedResource Include="Resources\Images\FrameGreen.png" />
     <EmbeddedResource Include="Resources\Images\FramePink.png" />
+    <EmbeddedResource Include="Resources\Images\home_icon.png" />
+    <EmbeddedResource Include="Resources\Images\timer_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AppShell.xaml.cs">
+      <DependentUpon>AppShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PomodoroPage.xaml.cs">
+      <DependentUpon>PomodoroPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="AddPage.xaml.cs">
+      <DependentUpon>AddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>

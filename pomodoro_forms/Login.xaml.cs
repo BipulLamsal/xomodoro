@@ -35,7 +35,7 @@ namespace pomodoro_forms
             if (email == "admin@gmail.com" && password == "admin")
             {
                 await DisplayAlert("Success", "Login successful!", "OK");
-                await Navigation.PushModalAsync(new MainPage());
+                Application.Current.MainPage = new AppShell();
 
             }
             else

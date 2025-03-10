@@ -1,0 +1,106 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:pomodoro_forms"
+             x:Class="pomodoro_forms.HomePage"
+             BackgroundColor="#F6F8FF">
+
+    <StackLayout Padding="20" Spacing="20" Margin="0,20,0,20">
+
+        <!-- Greeting and Username Section -->
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Label x:Name="GreetingLabel"
+                   Text="Good Morning!"
+                   TextColor="#7768E9"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start" />
+        </StackLayout>
+
+        <Label x:Name="UsernameLabel"
+               Text="Hello, User!"
+               TextColor="#444"
+               FontSize="20"
+               Margin="0,-20,0,0"
+               HorizontalOptions="Start"
+               VerticalOptions="Start" />
+
+        <StackLayout>
+            <Label Text="To-Do List"
+                   FontSize="22"
+                   TextColor="#7768E9"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,10"
+                   FontAttributes="Bold" />
+
+            <Frame BorderColor="#D1D1D6" Padding="0" HeightRequest="500" CornerRadius="8">
+                <ScrollView>
+                    <StackLayout x:Name="TodoListStack">
+                        <ListView x:Name="ToDoListView"
+                                  ItemsSource="{Binding FilteredTaskList}"
+                                  SeparatorVisibility="None"
+                                  BackgroundColor="#7768E9"
+                                  RowHeight="80">
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal" Padding="5" >
+                                            <Label Text="{Binding TaskName}" VerticalOptions="Center" FontSize="18" />
+                                            <Label Text="{Binding TaskDate}" HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontSize="16" />
+                                            <Button Text="&#xf00c;"
+                                                    FontFamily="{StaticResource FASolid}"
+                                                    BackgroundColor="#7768E9"
+                                                    TextColor="White"
+                                                    Command="{Binding MarkDoneCommand}"
+                                                    WidthRequest="50" />
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+            </Frame>
+        </StackLayout>
+
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Activities"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="#7768E9"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start" />
+
+
+                <DatePicker x:Name="ActivityDatePicker"
+                            VerticalOptions="Start"
+                            TextColor="#7768E9"
+                            HorizontalOptions="EndAndExpand"
+                            DateSelected="OnDateSelected" />
+            </StackLayout>
+
+
+            <Frame BorderColor="#D1D1D6" Padding="0" HeightRequest="350" CornerRadius="8">
+                <ListView x:Name="ActivityListView"
+                          IsVisible="True"
+                          ItemsSource="{Binding FilteredActivityLog}"
+                          SeparatorVisibility="None"
+                          BackgroundColor="#7768E9"
+                           RowHeight="80">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Padding="10">
+                                    <Label Text="{Binding Activity}" VerticalOptions="Center" />
+                                    <Label Text="{Binding Date}" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
