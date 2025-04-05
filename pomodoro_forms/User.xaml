@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pomodoro_forms.UserPage"
+             BackgroundColor="#F6F8FF"
+             Padding="20">
+
+    <StackLayout Spacing="15">
+
+        <!-- Page Title -->
+        <Label Text="User Settings"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="#7768E9"
+               HorizontalOptions="Start"
+               Margin="0,10,0,20" />
+
+        <ScrollView>
+            <StackLayout>
+                <!-- Nickname -->
+                <Label Text="Nickname" FontSize="16" TextColor="#7768E9" />
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="White">
+                    <Entry x:Name="NicknameEntry" FontSize="16" TextColor="#333" />
+                </Frame>
+
+                <!-- Username -->
+                <Label Text="Username" FontSize="16" TextColor="#7768E9" />
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="White">
+                    <Entry x:Name="UsernameEntry" FontSize="16" TextColor="#333" />
+                </Frame>
+
+                <!-- Current Password -->
+                <Label Text="Current Password" FontSize="16" TextColor="#7768E9" />
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="White">
+                    <Entry x:Name="CurrentPasswordEntry" FontSize="16" TextColor="#333" IsPassword="True" />
+                </Frame>
+
+                <!-- New Password -->
+                <Label Text="New Password" FontSize="16" TextColor="#7768E9" />
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="White">
+                    <Entry x:Name="NewPasswordEntry" FontSize="16" TextColor="#333" IsPassword="True" />
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Update Button -->
+        <Button Text="Update"
+                BackgroundColor="#7768E9"
+                TextColor="White"
+                FontSize="16"
+                CornerRadius="10"
+                Clicked="UpdateButton_Clicked"
+                HorizontalOptions="FillAndExpand"
+                Margin="0,20,0,0" />
+
+        <!-- Logout Button -->
+        <Button Text="Logout"
+                BackgroundColor="Red"
+                TextColor="White"
+                FontSize="16"
+                CornerRadius="10"
+                Clicked="LogoutButton_Clicked"
+                HorizontalOptions="FillAndExpand"
+                Margin="0,20,0,0" />
+
+    </StackLayout>
+
+</ContentPage>

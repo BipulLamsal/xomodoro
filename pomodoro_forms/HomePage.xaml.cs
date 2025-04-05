@@ -1,126 +1,196 @@
-﻿using System;
+﻿using Xamarin.Forms;
+using Xamarin.Essentials;
+using System;
+using System.Linq;
 using System.Collections.ObjectModel;
-using System.Linq;  // For LINQ methods
-using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace pomodoro_forms
 {
     public partial class HomePage : ContentPage
     {
-        // Static Task List with predefined data
-        public ObservableCollection<Task> TaskList { get; set; }
-        public ObservableCollection<Task> FilteredTaskList { get; set; }
-
-        // Static Activity Log
-        public ObservableCollection<ActivityLog> FilteredActivityLog { get; set; }
+        private DatabaseHelper _db;
+        private ObservableCollection<TaskModel> _tasks;
 
         public HomePage()
         {
             InitializeComponent();
+            _db = new DatabaseHelper();
+            _tasks = new ObservableCollection<TaskModel>();
 
-            // Initialize task list with more past tasks, some done, some pending
-            TaskList = new ObservableCollection<Task>
-            {
-                new Task { TaskName = "Swimming", TaskDate = DateTime.Today.AddDays(-1), Description = "Swim 30 laps", IsDone = false },
-                new Task { TaskName = "Coding", TaskDate = DateTime.Today.AddDays(-2), Description = "Code Pomodoro app", IsDone = true },
-                new Task { TaskName = "Reading", TaskDate = DateTime.Today.AddDays(-3), Description = "Read 'Clean Code'", IsDone = false },
-                new Task { TaskName = "Exercise", TaskDate = DateTime.Today, Description = "Full-body workout", IsDone = false },
-                new Task { TaskName = "Study Math", TaskDate = DateTime.Today.AddDays(-1), Description = "Math homework", IsDone = true },
-                new Task { TaskName = "Yoga", TaskDate = DateTime.Today.AddDays(-2), Description = "Yoga practice", IsDone = false },
-                new Task { TaskName = "Portfolio", TaskDate = DateTime.Today.AddDays(-3), Description = "Update portfolio", IsDone = false },
-                new Task { TaskName = "Grocery Shopping", TaskDate = DateTime.Today.AddDays(-4), Description = "Buy groceries", IsDone = false },
-                new Task { TaskName = "Gym", TaskDate = DateTime.Today.AddDays(-4), Description = "Leg day", IsDone = true },
-                new Task { TaskName = "Project Meeting", TaskDate = DateTime.Today.AddDays(-5), Description = "Discuss project", IsDone = false },
-                new Task { TaskName = "Laundry", TaskDate = DateTime.Today.AddDays(-5), Description = "Do laundry", IsDone = true },
-                new Task { TaskName = "Blog Writing", TaskDate = DateTime.Today.AddDays(-1), Description = "Write blog post", IsDone = false },
-                new Task { TaskName = "Gardening", TaskDate = DateTime.Today.AddDays(-3), Description = "Water plants", IsDone = true },
-                new Task { TaskName = "Call Friend", TaskDate = DateTime.Today.AddDays(-2), Description = "Catch up call", IsDone = false },
-                new Task { TaskName = "Art Practice", TaskDate = DateTime.Today.AddDays(-4), Description = "Sketching", IsDone = false }
-            };
+            SetGreeting();
+            SetUsername();
 
-            // Initialize filtered task list with only pending tasks from 0 to -3 days
-            FilteredTaskList = new ObservableCollection<Task>(
-                TaskList.Where(t => !t.IsDone && t.TaskDate >= DateTime.Today.AddDays(-3) && t.TaskDate <= DateTime.Today)
-            );
-
-            // Initialize activity log with tasks from 0 to -3 days (both done and pending)
-            FilteredActivityLog = new ObservableCollection<ActivityLog>(
-                TaskList.Where(t => t.TaskDate >= DateTime.Today.AddDays(-3) && t.TaskDate <= DateTime.Today)
-                        .Select(t => new ActivityLog
-                        {
-                            Activity = $"{t.TaskName} - {t.Description} - Status: {(t.IsDone ? "Completed" : "Pending")}",
-                            Date = t.TaskDate
-                        })
-            );
-
-            // Set the binding context to the page's view model
-            BindingContext = this;
+            ToDoListStack.Children.Clear();
         }
 
-        // Handle DatePicker selection and filter tasks based on selected date
-        private void OnDateSelected(object sender, DateChangedEventArgs e)
+        protected override async void OnAppearing()
         {
-            if (e.NewDate != null)
+            base.OnAppearing();
+            await LoadTasksAsync();
+            UpdateTaskCounts();
+            SetUsername();
+        }
+
+        private void SetGreeting()
+        {
+            var hour = DateTime.Now.Hour;
+
+            if (hour >= 5 && hour < 12)
+                GreetingLabel.Text = "Good Morning! 👋";
+            else if (hour >= 12 && hour < 18)
+                GreetingLabel.Text = "Good Afternoon! 👋";
+            else
+                GreetingLabel.Text = "Good Evening! 👋";
+        }
+
+        private void SetUsername()
+        {
+            int userId = Preferences.Get("UserId", -1);
+            if (userId != -1)
             {
-                var selectedDate = e.NewDate.Date;
-                FilteredActivityLog.Clear();
-                FilteredTaskList.Clear();
+                var user = _db.GetUserById(userId);
+                UsernameLabel.Text = user != null ? $"Hello, {user.Nickname}" : "Hello, Guest";
+            }
+            else
+            {
+                UsernameLabel.Text = "Hello, Guest";
+            }
+        }
 
-                // Filter tasks for the selected date that are within -3 to 0 days
-                var filteredTasks = TaskList.Where(t => t.TaskDate.Date == selectedDate && t.TaskDate >= DateTime.Today.AddDays(-3) && t.TaskDate <= DateTime.Today);
 
-                foreach (var task in filteredTasks)
+        private async Task LoadTasksAsync()
+        {
+            int userId = Preferences.Get("UserId", -1);
+            if (userId == -1)
+            {
+                await DisplayAlert("Error", "User not found. Please log in again.", "OK");
+                return;
+            }
+
+            ToDoListStack.Children.Clear();
+
+            var today = DateTime.Today;
+            var tasks = _db.GetTasksByUser(userId)
+                           .Where(t => t.TaskDate.Date == today)
+                           .ToList();
+
+            _tasks.Clear();
+            if (tasks.Count == 0)
+            {
+                
+                var emptyStateImage = new Image
                 {
-                    string status = task.IsDone ? "Completed" : "Pending";
-                    FilteredActivityLog.Add(new ActivityLog
-                    {
-                        Activity = $"{task.TaskName} - {task.Description} - Status: {status}",
-                        Date = task.TaskDate
-                    });
+                    Source = "Notasks.png", 
+                    HeightRequest = 150,
+                    Aspect = Aspect.AspectFit,
+                    HorizontalOptions = LayoutOptions.Center,
+                    Margin = new Thickness(0, 20)
+                };
 
-                    // Add to filtered list if not done
-                    if (!task.IsDone)
-                        FilteredTaskList.Add(task);
+                var emptyStateLabel = new Label
+                {
+                    Text = "No tasks for today",
+                    FontSize = 18,
+                    TextColor = Color.Gray,
+                    HorizontalOptions = LayoutOptions.Center,
+                    Margin = new Thickness(0, 10)
+                };
+
+                var emptyStateStack = new StackLayout
+                {
+                    Children = { emptyStateImage, emptyStateLabel },
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center
+                };
+
+                ToDoListStack.Children.Add(emptyStateStack);
+            }
+            else
+            {
+                foreach (var task in tasks)
+                {
+                    _tasks.Add(task);
+                    AddTaskToUI(task);
                 }
             }
         }
 
-        // Command to mark task as done
-        private Command MarkDoneCommand => new Command((task) =>
+        private void AddTaskToUI(TaskModel task)
         {
-            var selectedTask = task as Task;
-            if (selectedTask != null)
+            var checkBox = new CheckBox
             {
-                selectedTask.IsDone = true;
-                FilteredTaskList.Remove(selectedTask);  // Remove if done
-            }
-        });
+                IsChecked = task.IsDone,
+                Color = Color.FromHex("#7768E9"),
+                VerticalOptions = LayoutOptions.Center
+            };
 
-        // Command to delete a task
-        private Command DeleteCommand => new Command((task) =>
+            checkBox.CheckedChanged += async (s, e) =>
+            {
+                task.IsDone = e.Value;
+                _db.UpdateTask(task);
+                UpdateTaskCounts();
+                
+            };
+
+
+
+            var taskLayout = new Frame
+            {
+                CornerRadius = 10,
+                Padding = 10,
+                BackgroundColor = Color.White,
+                Content = new StackLayout
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    Spacing = 10,
+                    Children =
+                    {
+                        checkBox,
+                        new StackLayout
+                        {
+                            Orientation = StackOrientation.Vertical,
+                            Children =
+                            {
+                                new Label
+                                {
+                                    Text = task.TaskName,
+                                    FontSize = 16,
+                                    TextColor = Color.Black,
+                                    FontAttributes = FontAttributes.Bold
+                                },
+                                new Label
+                                {
+                                    Text = $"{task.StartTime:hh\\:mm} - {task.EndTime:hh\\:mm}",
+                                    FontSize = 14,
+                                    TextColor = Color.Gray
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            ToDoListStack.Children.Add(taskLayout);
+        }
+
+
+        private void UpdateTaskCounts()
         {
-            var selectedTask = task as Task;
-            if (selectedTask != null)
-            {
-                TaskList.Remove(selectedTask);
-                FilteredTaskList.Remove(selectedTask);
-            }
-        });
-    }
+            int userId = Preferences.Get("UserId", -1);
+            if (userId == -1) return;
 
-    // Task Model
-    public class Task
-    {
-        public string TaskName { get; set; }
-        public DateTime TaskDate { get; set; }
-        public string Description { get; set; }
-        public bool IsDone { get; set; }
-    }
+            var tasks = _db.GetTasksByUser(userId);
+            var completedTasksCount = tasks.Count(t => t.IsDone);
+            var incompleteTasksCount = tasks.Count(t => !t.IsDone);
 
-    // Activity Log Model
-    public class ActivityLog
-    {
-        public string Activity { get; set; }
-        public DateTime Date { get; set; }
+            CompletedTask.Text = completedTasksCount.ToString();
+            IncompletedTask.Text = incompleteTasksCount.ToString();
+        }
+        private async void OnProfileButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new UserPage());
+        }
+
     }
 }

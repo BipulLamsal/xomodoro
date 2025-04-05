@@ -51,12 +51,12 @@ namespace pomodoro_forms
             SettingsManager.Notifications = NotificationsToggle.IsToggled;
 
             MessagingCenter.Send(this, "SettingsUpdated");
-            await Navigation.PopModalAsync();
+            await Navigation.PopAsync();
         }
 
         private async void OnCloseSettings(object sender, EventArgs e)
         {
-            await Navigation.PopModalAsync();
+            await Navigation.PopAsync();
         }
     }
 }

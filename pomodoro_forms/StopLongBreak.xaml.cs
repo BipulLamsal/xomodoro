@@ -28,7 +28,7 @@ namespace pomodoro_forms
 
         private async void NextScreen(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new MainPage());
+            await Navigation.PushAsync(new MainPage());
             
         }
     }

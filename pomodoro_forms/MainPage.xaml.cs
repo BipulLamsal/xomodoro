@@ -36,12 +36,12 @@ namespace pomodoro_forms
 
         private async void OnShortBreakButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new ShortBreakPage());
+            await Navigation.PushAsync(new ShortBreakPage());
         }
 
         private async void OnSettingsIconTapped(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new Settings());
+            await Navigation.PushAsync(new Settings());
         }
 
         private void OnStartPauseResumeClicked(object sender, EventArgs e)
@@ -147,7 +147,7 @@ namespace pomodoro_forms
                 _audioPlayer.Stop();
             }
 
-            await Navigation.PushModalAsync(new StopFocus());
+            await Navigation.PushAsync(new StopFocus());
         }
     }
 }

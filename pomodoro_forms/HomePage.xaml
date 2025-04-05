@@ -4,10 +4,10 @@
              x:Class="pomodoro_forms.HomePage"
              BackgroundColor="#F6F8FF">
 
-    <StackLayout Padding="20" Spacing="20" Margin="0,20,0,20">
+    <StackLayout Padding="20" Spacing="10" Margin="0,10,0,10">
 
-        <!-- Greeting and Username Section -->
-        <StackLayout Orientation="Horizontal" Spacing="10">
+        <!-- Greeting Section -->
+        <StackLayout Orientation="Horizontal">
             <Label x:Name="GreetingLabel"
                    Text="Good Morning!"
                    TextColor="#7768E9"
@@ -21,86 +21,86 @@
                Text="Hello, User!"
                TextColor="#444"
                FontSize="20"
-               Margin="0,-20,0,0"
+               Margin="0,-10,0,0"
                HorizontalOptions="Start"
                VerticalOptions="Start" />
 
-        <StackLayout>
-            <Label Text="To-Do List"
-                   FontSize="22"
-                   TextColor="#7768E9"
-                   HorizontalOptions="Start"
-                   Margin="0,0,0,10"
-                   FontAttributes="Bold" />
 
-            <Frame BorderColor="#D1D1D6" Padding="0" HeightRequest="500" CornerRadius="8">
-                <ScrollView>
-                    <StackLayout x:Name="TodoListStack">
-                        <ListView x:Name="ToDoListView"
-                                  ItemsSource="{Binding FilteredTaskList}"
-                                  SeparatorVisibility="None"
-                                  BackgroundColor="#7768E9"
-                                  RowHeight="80">
 
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <StackLayout Orientation="Horizontal" Padding="5" >
-                                            <Label Text="{Binding TaskName}" VerticalOptions="Center" FontSize="18" />
-                                            <Label Text="{Binding TaskDate}" HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontSize="16" />
-                                            <Button Text="&#xf00c;"
-                                                    FontFamily="{StaticResource FASolid}"
-                                                    BackgroundColor="#7768E9"
-                                                    TextColor="White"
-                                                    Command="{Binding MarkDoneCommand}"
-                                                    WidthRequest="50" />
-                                        </StackLayout>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+        <Frame BackgroundColor="#7768E9" CornerRadius="15" Padding="0" HorizontalOptions="End"  Margin="0,-60,0,0">
+            <Button x:Name="ProfileButton"
+            Text="Profile"
+            FontSize="12"
+            TextColor="White"
+            BackgroundColor="#7768E9"
+            HorizontalOptions="EndAndExpand"
+            WidthRequest="100"
+           
+            Clicked="OnProfileButtonClicked">
+                <Button.ImageSource>
+                    <FontImageSource FontFamily="{StaticResource FASolid}" Glyph="&#xf007;" Size="Small" />
+                </Button.ImageSource>
+            </Button>
+        </Frame>
+
+
+
+        <!-- Task Completion Section -->
+        <Grid ColumnSpacing="10" Margin="0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Completed Tasks -->
+            <Frame BackgroundColor="#7768E9" CornerRadius="15" Padding="20" Grid.Column="0">
+                <StackLayout>
+                    <Label Text="Completed Tasks" TextColor="White" FontAttributes="Bold"/>
+                    <Label x:Name="CompletedTask" Text="10" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Incomplete Tasks -->
+            <Frame BackgroundColor="Coral" CornerRadius="15" Padding="20" Grid.Column="1">
+                <StackLayout>
+                    <Label  Text="Incomplete Tasks" TextColor="White" FontAttributes="Bold"/>
+                    <Label x:Name="IncompletedTask" Text="10" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+        <!-- Today's Task Section -->
+        <Label Text="Today's Task"
+               FontSize="22"
+               TextColor="#7768E9"
+               FontAttributes="Bold"
+               Margin="0,5,0,0"/>
+
+        <StackLayout x:Name="ToDoListStack" Spacing="10">
+            <Frame CornerRadius="10" Padding="10" BackgroundColor="White">
+                <StackLayout Orientation="Horizontal" Spacing="10">
+
+                    <!-- Checkbox -->
+                    <CheckBox x:Name="TaskCheckBox"
+                              Color="#7768E9"
+                              VerticalOptions="Center"/>
+
+                    <!-- Task Details -->
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Buy a pack of coffee"
+                               FontSize="16"
+                               TextColor="Black"
+                               FontAttributes="Bold"/>
+                        <Label Text="10:30 - 11:00"
+                               FontSize="14"
+                               TextColor="Gray"/>
                     </StackLayout>
-                </ScrollView>
+
+                </StackLayout>
             </Frame>
         </StackLayout>
 
-        <StackLayout>
-            <StackLayout Orientation="Horizontal" Spacing="10">
-                <Label Text="Activities"
-                       FontSize="22"
-                       FontAttributes="Bold"
-                       TextColor="#7768E9"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Start" />
-
-
-                <DatePicker x:Name="ActivityDatePicker"
-                            VerticalOptions="Start"
-                            TextColor="#7768E9"
-                            HorizontalOptions="EndAndExpand"
-                            DateSelected="OnDateSelected" />
-            </StackLayout>
-
-
-            <Frame BorderColor="#D1D1D6" Padding="0" HeightRequest="350" CornerRadius="8">
-                <ListView x:Name="ActivityListView"
-                          IsVisible="True"
-                          ItemsSource="{Binding FilteredActivityLog}"
-                          SeparatorVisibility="None"
-                          BackgroundColor="#7768E9"
-                           RowHeight="80">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal" Padding="10">
-                                    <Label Text="{Binding Activity}" VerticalOptions="Center" />
-                                    <Label Text="{Binding Date}" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Frame>
-        </StackLayout>
+        
     </StackLayout>
+
 </ContentPage>

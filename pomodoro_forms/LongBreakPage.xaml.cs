@@ -10,7 +10,6 @@ namespace pomodoro_forms
         private int _secondsRemaining;
         private bool _isRunning = false;
         private bool _isPaused = false;
-        private bool _isFocusTime = true;
         private System.Threading.Timer _timer;
         private ISimpleAudioPlayer _audioPlayer;
         private int WorkDuration = SettingsManager.LongBreak * 60;
@@ -34,7 +33,7 @@ namespace pomodoro_forms
                 _audioPlayer.Stop();
             }
 
-            await Navigation.PushModalAsync(new MainPage());
+            await Navigation.PushAsync(new MainPage());
         }
 
         private void OnStartPauseResumeClicked(object sender, EventArgs e)
@@ -135,7 +134,7 @@ namespace pomodoro_forms
                 _audioPlayer.Stop();
             }
 
-            await Navigation.PushModalAsync(new StopLongBreak());
+            await Navigation.PushAsync(new StopLongBreak());
         }
     }
 }

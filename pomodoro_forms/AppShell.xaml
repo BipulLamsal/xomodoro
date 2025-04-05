@@ -7,19 +7,49 @@
        Shell.UnselectedColor="#B37768E9"
        Shell.BackgroundColor="#EBEEFF">
 
-    <TabBar>
+    <Shell.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="IconFont">
+                <On Platform="iOS" Value="FontAwesome5Free-Solid" />
+                <On Platform="Android" Value="#FontAwesome5Free-Solid" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </Shell.Resources>
 
-        <Tab Title="Home" Icon="home_icon.png">
+    <TabBar>
+        <Tab Title="Home">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FASolid}" Glyph="&#xf015;" Size="Small" />
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
         </Tab>
 
-
-        <Tab Title="Add" Icon="add_icon.png">
+        <Tab Title="Add">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FASolid}" Glyph="&#xf067;" Size="Small" />
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate local:AddPage}" />
         </Tab>
 
+        <Tab Title="Activities">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FASolid}" Glyph="&#xf022;" Size="Small" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:Activities}" />
+        </Tab>
 
-        <Tab Title="Pomodoro" Icon="timer_icon.png">
+
+        <Tab Title="Stats">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FASolid}" Glyph="&#xe473;" Size="Small" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:StatsPage}" />
+        </Tab>
+
+        <Tab Title="Pomodoro">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FASolid}" Glyph="&#xf017;" Size="Small" />
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
         </Tab>
     </TabBar>

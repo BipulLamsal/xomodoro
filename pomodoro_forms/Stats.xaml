@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="pomodoro_forms.StatsPage"
+             Title="Stats"
+             BackgroundColor="#F6F8FF">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="25">
+
+                <Label Text="Task Stats"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Start"
+                       TextColor="#7768E9"
+                       
+                       />
+
+                <Label Text="Tasks by Category"
+                     
+                       FontSize="Medium"
+                       TextColor="#7768E9"
+                       FontAttributes="None"
+                       HorizontalOptions="Start" />
+
+                <Frame CornerRadius="12"
+BorderColor="LightGray"
+HasShadow="True">
+
+                    <microcharts:ChartView x:Name="pieChartView"
+                                       HeightRequest="300"
+                                       VerticalOptions="FillAndExpand"
+                                       HorizontalOptions="FillAndExpand" />
+
+                </Frame>
+
+                <Label Text="Completed vs Incomplete (Last 7 Days)"
+                       FontSize="Medium"
+TextColor="#7768E9"
+FontAttributes="None"
+HorizontalOptions="Start" />
+
+                <Frame CornerRadius="12"
+       BorderColor="LightGray"
+       HasShadow="True">
+                    <microcharts:ChartView x:Name="lineChartView"
+                                       HeightRequest="300"
+                                       VerticalOptions="FillAndExpand"
+                                       HorizontalOptions="FillAndExpand" />
+                </Frame>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

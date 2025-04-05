@@ -126,8 +126,14 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microcharts.Forms">
+      <Version>0.9.5.9</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="SkiaSharp.Views.Forms">
+      <Version>2.88.9</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer">
       <Version>1.6.0</Version>

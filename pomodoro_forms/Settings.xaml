@@ -52,6 +52,7 @@
                            TextChanged="OnFocusTimeEntryChanged" />
 
                     
+                    
                     <Label Grid.Row="4" Grid.Column="0" FontSize="16" Text="Auto resume timer" TextColor="#14401D" VerticalOptions="Center" />
                     <Switch Grid.Row="4" Grid.Column="1" x:Name="AutoResumeToggle" 
                             ThumbColor="#14401D" 

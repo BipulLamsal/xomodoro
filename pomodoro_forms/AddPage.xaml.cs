@@ -1,50 +1,119 @@
 ﻿using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
-using System.Collections.ObjectModel;
 
 namespace pomodoro_forms
 {
     public partial class AddPage : ContentPage
     {
-        public AddPage()
+        private DatabaseHelper _db;
+        private int _currentUserId;
+        private TaskModel _task;
+
+        public AddPage() : this(null)
+        {
+        }
+        public AddPage(TaskModel task = null) 
         {
             InitializeComponent();
+            _db = new DatabaseHelper();
+
+            _currentUserId = Preferences.Get("UserId", -1);
+
+            if (_currentUserId == -1)
+            {
+                DisplayAlert("Error", "User not found! Please log in again.", "OK");
+                Application.Current.MainPage = new Login();
+            }
+
+            _task = task;
+
+            if (_task != null)
+            {
+                // Populate fields with task details
+                TaskNameEntry.Text = _task.TaskName;
+                CategoryPicker.SelectedItem = _task.Category;
+                DescriptionEntry.Text = _task.Description;
+                TaskDatePicker.Date = _task.TaskDate;
+                StartTimePicker.Time = _task.StartTime;
+                EndTimePicker.Time = _task.EndTime;
+                IsDoneSwitch.IsChecked = _task.IsDone;
+            }
         }
 
-        public static ObservableCollection<Task> TaskList = new ObservableCollection<Task>();
-
-        private void AddTaskButton_Clicked(object sender, EventArgs e)
+        private async void AddTaskButton_Clicked(object sender, EventArgs e)
         {
-
             string taskName = TaskNameEntry.Text;
+            string category = CategoryPicker.SelectedItem?.ToString();
             string description = DescriptionEntry.Text;
             DateTime taskDate = TaskDatePicker.Date;
-            bool isDone = IsDoneSwitch.IsToggled;
+            TimeSpan startTime = StartTimePicker.Time;
+            TimeSpan endTime = EndTimePicker.Time;
+            bool isDone = IsDoneSwitch.IsChecked;
 
-            if (string.IsNullOrWhiteSpace(taskName) || string.IsNullOrWhiteSpace(description))
+            if (string.IsNullOrWhiteSpace(taskName) || string.IsNullOrWhiteSpace(category) || string.IsNullOrWhiteSpace(description))
             {
-
-                DisplayAlert("Error", "All fields are required", "OK");
+                await DisplayAlert("Error", "All fields are required", "OK");
                 return;
             }
 
-            Task newTask = new Task
+            if (endTime <= startTime)
             {
-                TaskName = taskName,
-                Description = description,
-                TaskDate = taskDate,
-                IsDone = isDone
-            };
+                await DisplayAlert("Error", "End time must be later than start time", "OK");
+                return;
+            }
 
-            TaskList.Add(newTask);
+            if (_task == null)
+            {
+                _task = new TaskModel
+                {
+                    TaskName = taskName,
+                    Category = category,
+                    Description = description,
+                    TaskDate = taskDate,
+                    StartTime = startTime,
+                    EndTime = endTime,
+                    UserId = _currentUserId,
+                    IsDone = isDone
+                };
 
-            DisplayAlert("Task Added", "Your task has been added successfully!", "OK");
-            Console.WriteLine($"Task added: {newTask.TaskName}, Total tasks in TaskList: {TaskList.Count}");
+                int result = _db.InsertTask(_task);
 
-            TaskNameEntry.Text = string.Empty;
-            DescriptionEntry.Text = string.Empty;
-            TaskDatePicker.Date = DateTime.Now;
-            IsDoneSwitch.IsToggled = false;
+                if (result > 0)
+                {
+                    await DisplayAlert("Success", "Task added successfully!", "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Failed to add task", "OK");
+                }
+            }
+            else
+            {
+                _task.TaskName = taskName;
+                _task.Category = category;
+                _task.Description = description;
+                _task.TaskDate = taskDate;
+                _task.StartTime = startTime;
+                _task.EndTime = endTime;
+                _task.IsDone = isDone;
+
+                int result = _db.UpdateTask(_task);
+
+                if (result > 0)
+                {
+                    await DisplayAlert("Success", "Task updated successfully!", "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Failed to update task", "OK");
+                }
+            }
+
+            await Navigation.PushAsync(new AddPage());
+            Navigation.RemovePage(this);
         }
     }
+
+
 }

@@ -38,7 +38,7 @@ namespace pomodoro_forms
                 _audioPlayer.Stop();
             }
 
-            await Navigation.PushModalAsync(new LongBreakPage());
+            await Navigation.PushAsync(new LongBreakPage());
         }
 
         private void OnStartPauseResumeClicked(object sender, EventArgs e)
@@ -131,7 +131,7 @@ namespace pomodoro_forms
                 _audioPlayer.Stop();
             }
 
-            await Navigation.PushModalAsync(new StopShortBreak());
+            await Navigation.PushAsync(new StopShortBreak());
         }
     }
 }

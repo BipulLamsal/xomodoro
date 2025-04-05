@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace pomodoro_forms
 {
     public partial class Login : ContentPage
     {
+        private DatabaseHelper _db;
+
         public Login()
         {
             InitializeComponent();
-
+            _db = new DatabaseHelper(); 
         }
 
         private async void OnLoginButtonClicked(object sender, EventArgs e)
@@ -31,12 +32,15 @@ namespace pomodoro_forms
                 return;
             }
 
+            var user = _db.GetUserByEmailAndPassword(email, password);
 
-            if (email == "admin@gmail.com" && password == "admin")
+            if (user != null)
             {
-                await DisplayAlert("Success", "Login successful!", "OK");
-                Application.Current.MainPage = new AppShell();
 
+                Preferences.Set("UserId", user.Id);
+
+                await DisplayAlert("Success", "Login successful!", "OK");
+                Application.Current.MainPage = new AppShell(); 
             }
             else
             {
@@ -53,6 +57,5 @@ namespace pomodoro_forms
         {
             return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
         }
-
     }
 }
